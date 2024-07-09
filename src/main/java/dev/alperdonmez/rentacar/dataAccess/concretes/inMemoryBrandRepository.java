@@ -2,10 +2,13 @@ package dev.alperdonmez.rentacar.dataAccess.concretes;
 
 import dev.alperdonmez.rentacar.dataAccess.abstracts.IBrandRepository;
 import dev.alperdonmez.rentacar.entities.concretes.Brand;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository //bu sınıf bir dataAccess nesnesidir
 public class inMemoryBrandRepository implements IBrandRepository {
     List<Brand> brands;
 
@@ -20,6 +23,6 @@ public class inMemoryBrandRepository implements IBrandRepository {
 
     @Override
     public List<Brand> getAll() {
-        return List.of();
+        return brands;
     }
 }

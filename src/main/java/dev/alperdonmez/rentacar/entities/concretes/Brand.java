@@ -1,5 +1,6 @@
 package dev.alperdonmez.rentacar.entities.concretes;
 
+@Table("brands")
 public class Brand {
     private int brand_id;
 
