@@ -1,10 +1,25 @@
 package dev.alperdonmez.rentacar.entities.concretes;
 
-@Table("brands")
+import jakarta.persistence.*;
+import lombok.*;
+
+@Table(name="brands")
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Brand {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="brand_id")
     private int brand_id;
 
-    public Brand() {
+    @Column(name="name")
+    private String name;
+
+    /*public Brand() {
     }
 
     public Brand(int brand_id, String name) {
@@ -26,7 +41,5 @@ public class Brand {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    private String name;
+    }*/
 }
