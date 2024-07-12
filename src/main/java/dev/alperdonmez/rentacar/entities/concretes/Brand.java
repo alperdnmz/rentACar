@@ -3,6 +3,8 @@ package dev.alperdonmez.rentacar.entities.concretes;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Table(name="brands")
 @Entity
 @Data
@@ -13,11 +15,14 @@ import lombok.*;
 public class Brand {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="brand_id")
-    private int brand_id;
+    @Column(name="id")
+    private int id;
 
     @Column(name="name")
     private String name;
+
+    @OneToMany(mappedBy = "brand")
+    List<Model> models;
 
     /*public Brand() {
     }

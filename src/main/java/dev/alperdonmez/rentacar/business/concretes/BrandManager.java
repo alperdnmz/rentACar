@@ -5,9 +5,11 @@ import dev.alperdonmez.rentacar.business.requests.CreateBrandRequest;
 import dev.alperdonmez.rentacar.business.requests.UpdateBrandRequest;
 import dev.alperdonmez.rentacar.business.responses.GetAllBrandsResponse;
 import dev.alperdonmez.rentacar.business.responses.GetByIdBrandResponse;
+import dev.alperdonmez.rentacar.business.rules.BrandBusinessRoles;
 import dev.alperdonmez.rentacar.core.utilities.mappers.IModelMapperService;
 import dev.alperdonmez.rentacar.dataAccess.abstracts.IBrandRepository;
 import dev.alperdonmez.rentacar.entities.concretes.Brand;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,9 +19,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service //bu sınıf bir business nesnesidir
+@AllArgsConstructor
 public class BrandManager implements IBrandService {
     private IBrandRepository brandRepository;
     private IModelMapperService modelMapperService;
+    private BrandBusinessRoles brandBusinessRoles;
 
     @Autowired
     public BrandManager(IBrandRepository brandRepository, IModelMapperService modelMapperService) {
@@ -56,6 +60,7 @@ public class BrandManager implements IBrandService {
         /*Brand brand = new Brand();
         brand.setName(createBrandRequest.getName());*/
 
+        this.brandBusinessRoles.checkIfBrandNameExists(createBrandRequest.getName());
         Brand brand = this.modelMapperService.forRequest().map(createBrandRequest, Brand.class);
 
         this.brandRepository.save(brand);

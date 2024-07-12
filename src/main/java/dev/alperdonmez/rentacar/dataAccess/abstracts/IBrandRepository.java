@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 public interface IBrandRepository extends JpaRepository<Brand, Integer> {
+    boolean existsByName(String name);
 }

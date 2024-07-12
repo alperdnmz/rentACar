@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetByIdBrandResponse {
-    private int id;
+public class GetAllModelResponse {
     private String name;
+    private int brand_id;
+    private String brandName;
+    private int id;
 }
