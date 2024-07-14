@@ -4,7 +4,9 @@ import dev.alperdonmez.rentacar.business.abstracts.IModelService;
 import dev.alperdonmez.rentacar.business.requests.CreateModelRequest;
 import dev.alperdonmez.rentacar.business.responses.GetAllModelResponse;
 import dev.alperdonmez.rentacar.core.utilities.mappers.IModelMapperService;
+import dev.alperdonmez.rentacar.dataAccess.abstracts.IBrandRepository;
 import dev.alperdonmez.rentacar.dataAccess.abstracts.IModelRepository;
+import dev.alperdonmez.rentacar.entities.concretes.Brand;
 import dev.alperdonmez.rentacar.entities.concretes.Model;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,7 @@ public class ModelManager implements IModelService {
 
     private IModelRepository modelRepository;
     private IModelMapperService modelMapperService;
+    private IBrandRepository brandRepository;
 
     public List<GetAllModelResponse> getAll() {
         List<Model> models = modelRepository.findAll();
@@ -29,6 +32,10 @@ public class ModelManager implements IModelService {
     @Override
     public void add(CreateModelRequest createModelRequest) {
         Model model = this.modelMapperService.forRequest().map(createModelRequest, Model.class);
+
+        Brand brand = brandRepository.findById(createModelRequest.getBrand_id())
+                .orElseThrow(() -> new RuntimeException("Brand not found"));
+        model.setBrand(brand);
 
         this.modelRepository.save(model);
     }
