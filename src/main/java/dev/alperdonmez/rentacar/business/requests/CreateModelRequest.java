@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateModelRequest {
+
     @NotNull
     @NotBlank
     @Size(min = 3, max = 20)

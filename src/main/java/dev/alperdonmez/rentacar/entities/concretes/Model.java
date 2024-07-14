@@ -22,7 +22,7 @@ public class Model {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "brand_id")
+    @JoinColumn(name = "brand_id",referencedColumnName = "id")
     private Brand brand;
 
     @OneToMany(mappedBy = "model")
